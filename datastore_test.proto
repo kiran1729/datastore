@@ -1,0 +1,26 @@
+// Copyright (c) 2014 ZeroStack Inc.
+//
+// This file defines models for testing datastore module under chronos.
+
+package datastore;
+
+import "github.com/gogo/protobuf/gogoproto/gogo.proto";
+option (gogoproto.goproto_stringer_all)    = true;
+option (gogoproto.goproto_enum_prefix_all) = false;
+option (gogoproto.goproto_getters_all)     = false;
+option (gogoproto.unmarshaler_all)         = true;
+option (gogoproto.marshaler_all)           = true;
+option (gogoproto.sizer_all)               = true;
+option (gogoproto.equal_all)               = true;
+
+option java_package = "com.zerostack.datastore";
+option java_outer_classname = "DataStoreTest";
+
+message CompositeKey {
+  required string column_family = 1 [(gogoproto.moretags) =
+  "cql:\"composite_key,((composite_key1,composite_key2),key3)\""];
+  required string composite_key1 = 2 [(gogoproto.moretags) = "cql:\"composite_key1\""];
+  required string composite_key2 = 3 [(gogoproto.moretags) = "cql:\"composite_key2\""];
+  required int64 key3 = 4 [(gogoproto.moretags) = "cql:\"key3\""];
+  required string value = 5 [(gogoproto.moretags) = "cql:\"value\""];
+}
